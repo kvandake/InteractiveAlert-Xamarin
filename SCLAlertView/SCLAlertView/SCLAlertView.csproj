@@ -14,7 +14,13 @@
     <PackageId>SCLAlertView-Xamarin</PackageId>
     <PackageVersion>1.0</PackageVersion>
     <Authors>kvandake</Authors>
-    <Description>Port SCLAlertView to Xamarin</Description>
+    <Description>SCLAlertView port to Xamarin</Description>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/kvandake/SCLAlertView-Xamarin/master/LICENSE</PackageLicenseUrl>
+    <Owners>kvandake</Owners>
+    <PackageProjectUrl>https://github.com/kvandake/SCLAlertView-Xamarin</PackageProjectUrl>
+    <Summary>SCLAlertView port to Xamarin</Summary>
+    <PackageTags>xamarin,ios</PackageTags>
+    <Title>SCLAlertView-Xamarin</Title>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
