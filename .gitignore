@@ -1,0 +1,12 @@
+
+# Created by https://www.gitignore.io/api/xamarinstudio
+
+### XamarinStudio ###
+bin/
+obj/
+*.userprefs
+.packages
+*/packages/
+.droidres
+
+# End of https://www.gitignore.io/api/xamarinstudio
