@@ -1,4 +1,4 @@
-﻿namespace SCLAlertView.Core
+﻿namespace InteractiveAlert
 {
 	public enum InteractiveAlertStyle
 	{

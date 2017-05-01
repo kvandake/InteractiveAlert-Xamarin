@@ -3,23 +3,22 @@ using Android.Support.V4.App;
 using Android.Content;
 using Android.Views;
 using Android.Widget;
-using SCLAlertView.Core;
 using Android.Support.V7.App;
 
-namespace SCLAlertView.Droid
+namespace InteractiveAlert.Droid
 {
-	public class SCLAlertDialog : AppCompatDialogFragment
+	public class SCLAlertDialogFragment : AppCompatDialogFragment
 	{
 		private readonly InteractiveAlertStyle alertStyle;
 
 		private ITopContentViewHolder topViewHolder;
 
-		protected SCLAlertDialog()
+		protected SCLAlertDialogFragment()
 		{
 
 		}
 
-		public SCLAlertDialog(InteractiveAlertStyle alertStyle)
+		public SCLAlertDialogFragment(InteractiveAlertStyle alertStyle)
 		{
 			this.alertStyle = alertStyle;
 		}
@@ -120,27 +119,27 @@ namespace SCLAlertView.Droid
 			return alertDialogBuilder.Create();
 		}
 
-		public SCLAlertDialog SetTitleText(string value)
+		public SCLAlertDialogFragment SetTitleText(string value)
 		{
 			this.TitleText = value;
 			return this;
 		}
 
-		public SCLAlertDialog SetShowOk(bool value)
+		public SCLAlertDialogFragment SetShowOk(bool value)
 		{
 			this.ShowOk = value;
 
 			return this;
 		}
 
-		public SCLAlertDialog SetShowCancel(bool value)
+		public SCLAlertDialogFragment SetShowCancel(bool value)
 		{
 			this.ShowCancel = value;
 
 			return this;
 		}
 
-		public SCLAlertDialog SetContentText(string value)
+		public SCLAlertDialogFragment SetContentText(string value)
 		{
 			this.ContentText = value;
 			return this;

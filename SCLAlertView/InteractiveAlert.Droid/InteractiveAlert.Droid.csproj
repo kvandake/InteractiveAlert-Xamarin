@@ -4,16 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A62C3D71-662A-4770-B7F1-F5F3CDEF3D78}</ProjectGuid>
+    <ProjectGuid>{7C40A7E0-6338-4AC0-9139-2001A09E08A1}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>SCLAlertView.Droid.Sample</RootNamespace>
-    <AssemblyName>SCLAlertView.Droid.Sample</AssemblyName>
+    <RootNamespace>InteractiveAlert.Droid</RootNamespace>
+    <AssemblyName>InteractiveAlert.Droid</AssemblyName>
     <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
-    <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
-    <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <AndroidUseLatestPlatformSdk>true</AndroidUseLatestPlatformSdk>
@@ -27,7 +25,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
-    <AndroidSupportedAbis>arm64-v8a;armeabi;armeabi-v7a;x86</AndroidSupportedAbis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -73,32 +70,56 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rotate3dAnimation.cs" />
+    <Compile Include="SCLAlertDialogFragment.cs" />
+    <Compile Include="SuccessTickView.cs" />
+    <Compile Include="TopViewHolders\BaseTopContentViewHolder.cs" />
+    <Compile Include="TopViewHolders\ErrorTopContentViewHolder.cs" />
+    <Compile Include="TopViewHolders\ITopContentViewHolder.cs" />
+    <Compile Include="TopViewHolders\SuccessTopContentViewHolder.cs" />
+    <Compile Include="TopViewHolders\TopContentFactory.cs" />
+    <Compile Include="TopViewHolders\WaitTopContentViewHolder.cs" />
+    <Compile Include="TopViewHolders\WarningTopContentViewHolder.cs" />
+    <Compile Include="InteractiveAlertsImpl.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\AboutResources.txt" />
-    <None Include="Properties\AndroidManifest.xml" />
-    <None Include="Assets\AboutAssets.txt" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\Main.axml" />
-    <AndroidResource Include="Resources\values\Strings.xml" />
-    <AndroidResource Include="Resources\mipmap-hdpi\Icon.png" />
-    <AndroidResource Include="Resources\mipmap-mdpi\Icon.png" />
-    <AndroidResource Include="Resources\mipmap-xhdpi\Icon.png" />
-    <AndroidResource Include="Resources\mipmap-xxhdpi\Icon.png" />
-    <AndroidResource Include="Resources\mipmap-xxxhdpi\Icon.png" />
-  </ItemGroup>
-  <ItemGroup>
+    <Folder Include="TopViewHolders\" />
+    <Folder Include="Resources\anim\" />
     <Folder Include="Resources\drawable\" />
+    <Folder Include="Resources\layout\" />
+    <Folder Include="Resources\values\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SCLAlertView.Droid\SCLAlertView.Droid.csproj">
-      <Project>{A4757CDA-CADE-4413-93AE-D5CB6E1C03A8}</Project>
-      <Name>SCLAlertView.Droid</Name>
+    <AndroidResource Include="Resources\anim\error_x_in.xml" />
+    <AndroidResource Include="Resources\anim\modal_in.xml" />
+    <AndroidResource Include="Resources\anim\modal_out.xml" />
+    <AndroidResource Include="Resources\anim\success_bow_roate.xml" />
+    <AndroidResource Include="Resources\anim\success_mask_layout.xml" />
+    <AndroidResource Include="Resources\drawable\error_center_x.xml" />
+    <AndroidResource Include="Resources\drawable\error_circle.xml" />
+    <AndroidResource Include="Resources\drawable\success_bow.xml" />
+    <AndroidResource Include="Resources\drawable\success_circle.xml" />
+    <AndroidResource Include="Resources\drawable\warning_circle.xml" />
+    <AndroidResource Include="Resources\drawable\warning_sigh.xml" />
+    <AndroidResource Include="Resources\layout\alert_dialog.xml" />
+    <AndroidResource Include="Resources\layout\error_top_view.xml" />
+    <AndroidResource Include="Resources\layout\success_top_view.xml" />
+    <AndroidResource Include="Resources\layout\wait_top_view.xml" />
+    <AndroidResource Include="Resources\layout\warning_top_view.xml" />
+    <AndroidResource Include="Resources\values\colors.xml" />
+    <AndroidResource Include="Resources\values\dimen.xml" />
+    <AndroidResource Include="Resources\values\Strings.xml" />
+    <AndroidResource Include="Resources\values\styles.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\InteractiveAlert.Core\InteractiveAlert.Core.csproj">
+      <Project>{F137342A-B2E7-451E-A783-5A533F440761}</Project>
+      <Name>InteractiveAlert.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
