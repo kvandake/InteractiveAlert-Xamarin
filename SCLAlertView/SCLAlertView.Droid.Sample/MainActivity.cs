@@ -1,11 +1,12 @@
 ﻿using Android.App;
 using Android.Widget;
 using Android.OS;
+using Android.Support.V7.App;
 
 namespace SCLAlertView.Droid.Sample
 {
-	[Activity(Label = "SCLAlertView.Droid.Sample", MainLauncher = true, Icon = "@mipmap/icon")]
-	public class MainActivity : Activity
+	[Activity(Label = "SCLAlertView.Droid.Sample", MainLauncher = true, Icon = "@mipmap/icon", Theme = "@style/MyTheme")]
+	public class MainActivity : AppCompatActivity
 	{
 		int count = 1;
 
@@ -21,6 +22,14 @@ namespace SCLAlertView.Droid.Sample
 			Button button = FindViewById<Button>(Resource.Id.myButton);
 			button.Click += (s, e) =>
 			{
+				var dialogAlert = new SCLAlertDialog(Core.InteractiveAlertStyle.Warning);
+				dialogAlert.SetTitleText("Good job!");
+				dialogAlert.SetContentText("You clicked the button!");
+				dialogAlert.Show(this.SupportFragmentManager, "success");
+				dialogAlert.SetShowOk(true);
+				dialogAlert.SetShowCancel(true);
+				return;
+
 				new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
 					.SetTitleText("Good job!")
 					.SetContentText("You clicked the button!")

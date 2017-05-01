@@ -100,6 +100,10 @@
       <Project>{A4757CDA-CADE-4413-93AE-D5CB6E1C03A8}</Project>
       <Name>SCLAlertView.Droid</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SCLAlertView.Core\SCLAlertView.Core.csproj">
+      <Project>{C05B8750-EE0F-4A9C-8048-4A021DD83F36}</Project>
+      <Name>SCLAlertView.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Build.Download.0.4.3\build\Xamarin.Build.Download.targets" Condition="Exists('..\packages\Xamarin.Build.Download.0.4.3\build\Xamarin.Build.Download.targets')" />

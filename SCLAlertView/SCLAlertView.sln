@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCLAlertView.Droid", "SCLAl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCLAlertView.Droid.Sample", "SCLAlertView.Droid.Sample\SCLAlertView.Droid.Sample.csproj", "{A62C3D71-662A-4770-B7F1-F5F3CDEF3D78}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCLAlertView.Core", "SCLAlertView.Core\SCLAlertView.Core.csproj", "{C05B8750-EE0F-4A9C-8048-4A021DD83F36}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,5 +69,17 @@ Global
 		{A62C3D71-662A-4770-B7F1-F5F3CDEF3D78}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{A62C3D71-662A-4770-B7F1-F5F3CDEF3D78}.Debug|iPhone.ActiveCfg = Debug|Any CPU
 		{A62C3D71-662A-4770-B7F1-F5F3CDEF3D78}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{C05B8750-EE0F-4A9C-8048-4A021DD83F36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C05B8750-EE0F-4A9C-8048-4A021DD83F36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C05B8750-EE0F-4A9C-8048-4A021DD83F36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C05B8750-EE0F-4A9C-8048-4A021DD83F36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C05B8750-EE0F-4A9C-8048-4A021DD83F36}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{C05B8750-EE0F-4A9C-8048-4A021DD83F36}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{C05B8750-EE0F-4A9C-8048-4A021DD83F36}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{C05B8750-EE0F-4A9C-8048-4A021DD83F36}.Release|iPhone.Build.0 = Release|Any CPU
+		{C05B8750-EE0F-4A9C-8048-4A021DD83F36}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{C05B8750-EE0F-4A9C-8048-4A021DD83F36}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{C05B8750-EE0F-4A9C-8048-4A021DD83F36}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{C05B8750-EE0F-4A9C-8048-4A021DD83F36}.Debug|iPhone.Build.0 = Debug|Any CPU
 	EndGlobalSection
 EndGlobal

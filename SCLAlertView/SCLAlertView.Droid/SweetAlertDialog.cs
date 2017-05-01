@@ -15,26 +15,26 @@ namespace SCLAlertView.Droid
 	/// </summary>
 	public class SweetAlertDialog : Dialog
 	{
-		private View mDialogView;
+		private Animation mOverlayOutAnim;
 		private AnimationSet mModalInAnim;
 		private AnimationSet mModalOutAnim;
-		private Animation mOverlayOutAnim;
+
+		private View mDialogView;
+
 		private Animation mErrorInAnim;
 		private AnimationSet mErrorXInAnim;
 		private AnimationSet mSuccessLayoutAnimSet;
 		private Animation mSuccessBowAnim;
 		private TextView mTitleTextView;
 		private TextView mContentTextView;
-		private String mTitleText;
-		private String mContentText;
+		private string mTitleText;
+		private string mContentText;
 		private bool mShowCancel;
 		private bool mShowContent;
-		private String mCancelText;
-		private String mConfirmText;
+		private string mCancelText;
+		private string mConfirmText;
 		private int mAlertType;
-		private FrameLayout mErrorFrame;
-		private FrameLayout mSuccessFrame;
-		private FrameLayout mProgressFrame;
+
 		private SuccessTickView mSuccessTick;
 		private ImageView mErrorX;
 		private View mSuccessLeftMask;
@@ -43,11 +43,16 @@ namespace SCLAlertView.Droid
 		private ImageView mCustomImage;
 		private Button mConfirmButton;
 		private Button mCancelButton;
-		private FrameLayout mWarningFrame;
+
 		private bool mCloseFromCancel;
 
-		public event EventHandler CancelClick;
+		private FrameLayout mWarningFrame;
+		private FrameLayout mErrorFrame;
+		private FrameLayout mSuccessFrame;
+		private FrameLayout mProgressFrame;
 
+		// handlers
+		public event EventHandler CancelClick;
 		public event EventHandler ConfirmClick;
 
 		public const int NORMAL_TYPE = 0;
@@ -69,7 +74,6 @@ namespace SCLAlertView.Droid
 			//mProgressHelper = new ProgressHelper(context);
 			mAlertType = alertType;
 			mErrorInAnim = this.CreateExitAnimation();
-			// mErrorInAnim = AnimationUtils.LoadAnimation(context, Resource.Animation.error_frame_in);
 			mErrorXInAnim = (AnimationSet)AnimationUtils.LoadAnimation(context, Resource.Animation.error_x_in);
 
 			// 2.3.x system don't support alpha-animation on layer-list drawable
@@ -139,20 +143,20 @@ namespace SCLAlertView.Droid
 			base.OnCreate(savedInstanceState);
 
 			SetContentView(Resource.Layout.alert_dialog);
-			mDialogView = this.Window.DecorView.FindViewById(Android.Resource.Id.Content);
-			mTitleTextView = (TextView)FindViewById(Resource.Id.title_text);
-			mContentTextView = (TextView)FindViewById(Resource.Id.content_text);
-			mErrorFrame = (FrameLayout)FindViewById(Resource.Id.error_frame);
-			mErrorX = (ImageView)mErrorFrame.FindViewById(Resource.Id.error_x);
-			mSuccessFrame = (FrameLayout)FindViewById(Resource.Id.success_frame);
-			mProgressFrame = (FrameLayout)FindViewById(Resource.Id.progress_dialog);
-			mSuccessTick = (SuccessTickView)mSuccessFrame.FindViewById(Resource.Id.success_tick);
-			mSuccessLeftMask = mSuccessFrame.FindViewById(Resource.Id.mask_left);
-			mSuccessRightMask = mSuccessFrame.FindViewById(Resource.Id.mask_right);
-			mCustomImage = (ImageView)FindViewById(Resource.Id.custom_image);
-			mWarningFrame = (FrameLayout)FindViewById(Resource.Id.warning_frame);
-			mConfirmButton = (Button)FindViewById(Resource.Id.confirm_button);
-			mCancelButton = (Button)FindViewById(Resource.Id.cancel_button);
+			//mDialogView = this.Window.DecorView.FindViewById(Android.Resource.Id.Content);
+			//mTitleTextView = (TextView)FindViewById(Resource.Id.title_text);
+			//mContentTextView = (TextView)FindViewById(Resource.Id.content_text);
+			//mErrorFrame = (FrameLayout)FindViewById(Resource.Id.error_frame);
+			//mErrorX = (ImageView)mErrorFrame.FindViewById(Resource.Id.error_x);
+			//mSuccessFrame = (FrameLayout)FindViewById(Resource.Id.success_frame);
+			//mProgressFrame = (FrameLayout)FindViewById(Resource.Id.progress_dialog);
+			//mSuccessTick = (SuccessTickView)mSuccessFrame.FindViewById(Resource.Id.success_tick);
+			//mSuccessLeftMask = mSuccessFrame.FindViewById(Resource.Id.mask_left);
+			//mSuccessRightMask = mSuccessFrame.FindViewById(Resource.Id.mask_right);
+			//mCustomImage = (ImageView)FindViewById(Resource.Id.custom_image);
+			//mWarningFrame = (FrameLayout)FindViewById(Resource.Id.warning_frame);
+			//mConfirmButton = (Button)FindViewById(Resource.Id.confirm_button);
+			//mCancelButton = (Button)FindViewById(Resource.Id.cancel_button);
 			mConfirmButton.Click += (s, e) =>
 			{
 				var confirmHandler = this.ConfirmClick;
@@ -328,7 +332,7 @@ namespace SCLAlertView.Droid
 			}
 			else if (mAlertType == SUCCESS_TYPE)
 			{
-				mSuccessTick.startTickAnim();
+				mSuccessTick.StartTickAnim();
 				mSuccessRightMask.StartAnimation(mSuccessBowAnim);
 			}
 		}
@@ -356,7 +360,8 @@ namespace SCLAlertView.Droid
 						mSuccessRightMask.StartAnimation(mSuccessLayoutAnimSet.Animations[1]);
 						break;
 					case WARNING_TYPE:
-						mConfirmButton.SetBackgroundResource(Resource.Drawable.red_button_background);
+						// TODO
+						//mConfirmButton.SetBackgroundResource(Resource.Drawable.red_button_background);
 						mWarningFrame.Visibility = ViewStates.Visible;
 						break;
 					case CUSTOM_IMAGE_TYPE:
@@ -384,7 +389,8 @@ namespace SCLAlertView.Droid
 			this.mProgressFrame.Visibility = ViewStates.Gone;
 			this.mConfirmButton.Visibility = ViewStates.Gone;
 
-			this.mConfirmButton.SetBackgroundResource(Resource.Drawable.blue_button_background);
+			// TODO 
+			//this.mConfirmButton.SetBackgroundResource(Resource.Drawable.blue_button_background);
 			this.mErrorFrame.ClearAnimation();
 			this.mErrorX.ClearAnimation();
 			this.mSuccessTick.ClearAnimation();

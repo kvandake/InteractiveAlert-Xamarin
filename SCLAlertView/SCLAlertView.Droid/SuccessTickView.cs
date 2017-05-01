@@ -5,6 +5,7 @@ using Android.Util;
 using Android.Views;
 using Android.Views.Animations;
 using Android.Runtime;
+using Android.Support.V4.Content;
 
 namespace SCLAlertView.Droid
 {
@@ -38,7 +39,8 @@ namespace SCLAlertView.Droid
 		private void Init()
 		{
 			mPaint = new Paint();
-			mPaint.Color = this.Resources.GetColor(Resource.Color.success_stroke_color);
+			var color = ContextCompat.GetColor(this.Context, Resource.Color.success_stroke_color);
+			mPaint.Color = Color.Rgb(Color.GetRedComponent(color), Color.GetGreenComponent(color), Color.GetBlueComponent(color));
 			mLeftRectWidth = CONST_LEFT_RECT_W;
 			mRightRectWidth = CONST_RIGHT_RECT_W;
 			mLeftRectGrowMode = false;

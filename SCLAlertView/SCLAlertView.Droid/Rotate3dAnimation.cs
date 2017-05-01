@@ -8,7 +8,6 @@ using Android.Runtime;
 
 namespace SCLAlertView.Droid
 {
-	[Register("Rotate3dAnimation")]
 	public class Rotate3dAnimation : Animation
 	{
 		private Dimension mPivotXType = Dimension.Absolute;
