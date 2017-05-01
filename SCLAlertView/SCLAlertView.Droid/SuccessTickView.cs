@@ -25,15 +25,18 @@ namespace SCLAlertView.Droid
 		private float mRightRectWidth;
 		private bool mLeftRectGrowMode;
 
-		public SuccessTickView(Context context):base(context) {
-			init();
+		public SuccessTickView(Context context) : base(context)
+		{
+			this.Init();
 		}
 
-		public SuccessTickView(Context context, IAttributeSet attrs):base(context,attrs){
-			init();
+		public SuccessTickView(Context context, IAttributeSet attrs) : base(context, attrs)
+		{
+			this.Init();
 		}
 
-		private void init () {
+		private void Init()
+		{
 			mPaint = new Paint();
 			mPaint.Color = this.Resources.GetColor(Resource.Color.success_stroke_color);
 			mLeftRectWidth = CONST_LEFT_RECT_W;
@@ -54,14 +57,14 @@ namespace SCLAlertView.Droid
 			mMaxLeftRectWidth = (totalW + CONST_LEFT_RECT_W) / 2 + CONST_RECT_WEIGHT - 1;
 
 			RectF leftRect = new RectF();
-			if (mLeftRectGrowMode) 
+			if (mLeftRectGrowMode)
 			{
 				leftRect.Left = 0;
 				leftRect.Right = leftRect.Left + mLeftRectWidth;
 				leftRect.Top = (totalH + CONST_RIGHT_RECT_W) / 2;
 				leftRect.Bottom = leftRect.Top + CONST_RECT_WEIGHT;
-			} 
-			else 
+			}
+			else
 			{
 				leftRect.Right = (totalW + CONST_LEFT_RECT_W) / 2 + CONST_RECT_WEIGHT - 1;
 				leftRect.Left = leftRect.Right - mLeftRectWidth;
@@ -79,8 +82,10 @@ namespace SCLAlertView.Droid
 			canvas.DrawRoundRect(rightRect, CONST_RADIUS, CONST_RADIUS, mPaint);
 		}
 
-		public float dip2px(float dpValue) {
-			if(mDensity == -1) {
+		public float dip2px(float dpValue)
+		{
+			if (mDensity == -1)
+			{
 				mDensity = this.Resources.DisplayMetrics.Density;
 			}
 			return dpValue * mDensity + 0.5f;
@@ -100,20 +105,26 @@ namespace SCLAlertView.Droid
 				base.ApplyTransformation(interpolatedTime, t);
 				this.view.mLeftRectWidth = 0;
 				this.view.mRightRectWidth = 0;
-				if (0.54 < interpolatedTime && 0.7 >= interpolatedTime) {  // grow left and right rect to right
+				if (0.54 < interpolatedTime && 0.7 >= interpolatedTime)
+				{  // grow left and right rect to right
 					this.view.mLeftRectGrowMode = true;
 					this.view.mLeftRectWidth = this.view.mMaxLeftRectWidth * ((interpolatedTime - 0.54f) / 0.16f);
-					if (0.65 < interpolatedTime) {
+					if (0.65 < interpolatedTime)
+					{
 						this.view.mRightRectWidth = this.view.MAX_RIGHT_RECT_W * ((interpolatedTime - 0.65f) / 0.19f);
 					}
 					this.view.Invalidate();
-				} else if (0.7 < interpolatedTime && 0.84 >= interpolatedTime) { // shorten left rect from right, still grow right rect
+				}
+				else if (0.7 < interpolatedTime && 0.84 >= interpolatedTime)
+				{ // shorten left rect from right, still grow right rect
 					this.view.mLeftRectGrowMode = false;
 					this.view.mLeftRectWidth = this.view.mMaxLeftRectWidth * (1 - ((interpolatedTime - 0.7f) / 0.14f));
 					this.view.mLeftRectWidth = this.view.mLeftRectWidth < this.view.MIN_LEFT_RECT_W ? this.view.MIN_LEFT_RECT_W : this.view.mLeftRectWidth;
 					this.view.mRightRectWidth = this.view.MAX_RIGHT_RECT_W * ((interpolatedTime - 0.65f) / 0.19f);
 					this.view.Invalidate();
-				} else if (0.84 < interpolatedTime && 1 >= interpolatedTime) { // restore left rect width, shorten right rect to const
+				}
+				else if (0.84 < interpolatedTime && 1 >= interpolatedTime)
+				{ // restore left rect width, shorten right rect to const
 					this.view.mLeftRectGrowMode = false;
 					this.view.mLeftRectWidth = this.view.MIN_LEFT_RECT_W + (this.view.CONST_LEFT_RECT_W - this.view.MIN_LEFT_RECT_W) * ((interpolatedTime - 0.84f) / 0.16f);
 					this.view.mRightRectWidth = this.view.CONST_RIGHT_RECT_W + (this.view.MAX_RIGHT_RECT_W - this.view.CONST_RIGHT_RECT_W) * (1 - ((interpolatedTime - 0.84f) / 0.16f));
@@ -122,12 +133,12 @@ namespace SCLAlertView.Droid
 			}
 		}
 
-		public void startTickAnim () {
+		public void StartTickAnim()
+		{
 			// hide tick
-
 			this.Invalidate();
 			Animation tickAnim = new SelfAnimation(this);
-			tickAnim.Duration =750;
+			tickAnim.Duration = 750;
 			tickAnim.StartOffset = 100;
 			this.StartAnimation(tickAnim);
 		}

@@ -43,11 +43,12 @@ namespace SCLAlertView.Droid
 		private ImageView mCustomImage;
 		private Button mConfirmButton;
 		private Button mCancelButton;
-		//private ProgressHelper mProgressHelper;
 		private FrameLayout mWarningFrame;
-		private OnSweetClickListener mCancelClickListener;
-		private OnSweetClickListener mConfirmClickListener;
 		private bool mCloseFromCancel;
+
+		public event EventHandler CancelClick;
+
+		public event EventHandler ConfirmClick;
 
 		public const int NORMAL_TYPE = 0;
 		public const int ERROR_TYPE = 1;
@@ -56,36 +57,31 @@ namespace SCLAlertView.Droid
 		public const int CUSTOM_IMAGE_TYPE = 4;
 		public const int PROGRESS_TYPE = 5;
 
-		public interface OnSweetClickListener {
-			void onClick (SweetAlertDialog sweetAlertDialog);
+		public SweetAlertDialog(Context context) : base(context, NORMAL_TYPE)
+		{
+
 		}
 
-		public SweetAlertDialog(Context context):base(context, NORMAL_TYPE) {
-			
-		}
-
-		public SweetAlertDialog(Context context, int alertType):base(context,Resource.Style.alert_dialog) {
+		public SweetAlertDialog(Context context, int alertType) : base(context, Resource.Style.alert_dialog)
+		{
 			SetCancelable(true);
 			SetCanceledOnTouchOutside(false);
 			//mProgressHelper = new ProgressHelper(context);
 			mAlertType = alertType;
-			var errorAnimSet = new AnimationSet(true);
-			errorAnimSet.AddAnimation(new AlphaAnimation(0,1) { Duration = 400});
-			errorAnimSet.AddAnimation(new Rotate3dAnimation(0,100,0,50,50) {Duration = 400});
-			mErrorInAnim = errorAnimSet;
-
+			mErrorInAnim = this.CreateExitAnimation();
 			// mErrorInAnim = AnimationUtils.LoadAnimation(context, Resource.Animation.error_frame_in);
-			mErrorXInAnim =(AnimationSet)AnimationUtils.LoadAnimation(context, Resource.Animation.error_x_in);
+			mErrorXInAnim = (AnimationSet)AnimationUtils.LoadAnimation(context, Resource.Animation.error_x_in);
 
 			// 2.3.x system don't support alpha-animation on layer-list drawable
 			// remove it from animation set
-			if (Build.VERSION.SdkInt <= BuildVersionCodes.GingerbreadMr1) {
+			if (Build.VERSION.SdkInt <= BuildVersionCodes.GingerbreadMr1)
+			{
 				IList<Animation> childAnims = mErrorXInAnim.Animations;
 				int idx;
 				for (idx = 0; idx < childAnims.Count; idx++)
 				{
 					var childAnim = childAnims[idx];
-					if(childAnim is AlphaAnimation)
+					if (childAnim is AlphaAnimation)
 					{
 						break;
 					}
@@ -94,49 +90,49 @@ namespace SCLAlertView.Droid
 
 				}
 
-				if (idx < childAnims.Count) {
+				if (idx < childAnims.Count)
+				{
 					childAnims.RemoveAt(idx);
 				}
 			}
-			mSuccessBowAnim = AnimationUtils.LoadAnimation(context,  Resource.Animation.success_bow_roate);
+			mSuccessBowAnim = AnimationUtils.LoadAnimation(context, Resource.Animation.success_bow_roate);
 			mSuccessLayoutAnimSet = (AnimationSet)AnimationUtils.LoadAnimation(context, Resource.Animation.success_mask_layout);
-			mModalInAnim = (AnimationSet) AnimationUtils.LoadAnimation(context, Resource.Animation.modal_in);
-			mModalOutAnim = (AnimationSet) AnimationUtils.LoadAnimation(context, Resource.Animation.modal_out);
-			mModalOutAnim.AnimationEnd+=(s,e)=>
-			{
-				mDialogView.Visibility = ViewStates.Gone;
-				mDialogView.Post(()=>
-				{
-					if (mCloseFromCancel) {
-						this.Cancel();
-					} else {
-						this.Dismiss();
-					}					
-				});
-			};
-			      
+			mModalInAnim = (AnimationSet)AnimationUtils.LoadAnimation(context, Resource.Animation.modal_in);
+			mModalOutAnim = (AnimationSet)AnimationUtils.LoadAnimation(context, Resource.Animation.modal_out);
+			mModalOutAnim.AnimationEnd += (s, e) =>
+			  {
+				  mDialogView.Visibility = ViewStates.Gone;
+				  mDialogView.Post(() =>
+				  {
+					  if (mCloseFromCancel)
+					  {
+						  this.Cancel();
+					  }
+					  else
+					  {
+						  this.Dismiss();
+					  }
+				  });
+			  };
+
 			// dialog overlay fade out
-			mOverlayOutAnim = new SimppleAnimation(this.Window);
-			mOverlayOutAnim.Duration  =120;
+			mOverlayOutAnim = new SelfAnimation(this.Window);
+			mOverlayOutAnim.Duration = 120;
 		}
 
-		public class SimppleAnimation : Animation
-		{
-			private readonly Window window;
+		public string CancelText => this.mCancelText;
 
-			public SimppleAnimation(Window window)
-	{
-				this.window = window;
-	}
+		public string ConfirmText => this.mConfirmText;
 
-		protected override void ApplyTransformation(float interpolatedTime, Transformation t)
-			{
-				base.ApplyTransformation(interpolatedTime, t);
-				var wlp = window.Attributes;
-				wlp.Alpha = 1 - interpolatedTime;
-				window.Attributes  =wlp;
-			}
-		}
+		public bool IsContentText => this.mShowContent;
+
+		public string ContentText => this.mContentText;
+
+		public bool IsShowCancelButton => this.mShowCancel;
+
+		public int AlerType => this.mAlertType;
+
+		public string TitleText => this.mTitleText;
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
@@ -157,52 +153,199 @@ namespace SCLAlertView.Droid
 			mWarningFrame = (FrameLayout)FindViewById(Resource.Id.warning_frame);
 			mConfirmButton = (Button)FindViewById(Resource.Id.confirm_button);
 			mCancelButton = (Button)FindViewById(Resource.Id.cancel_button);
-			//mProgressHelper.setProgressWheel((ProgressBar)FindViewById(Resource.Id.progressWheel));
-			mConfirmButton.Click+=this.OnClick;
-			mCancelButton.Click+=this.OnClick;
+			mConfirmButton.Click += (s, e) =>
+			{
+				var confirmHandler = this.ConfirmClick;
+				if (confirmHandler != null)
+				{
+					confirmHandler?.Invoke(this, EventArgs.Empty);
+				}
+				else
+				{
+					this.DismissWithAnimation();
+				}
+			};
 
-			setTitleText(mTitleText);
-			setContentText(mContentText);
-			setCancelText(mCancelText);
-			setConfirmText(mConfirmText);
-			changeAlertType(mAlertType, true);
+			mCancelButton.Click += (s, e) =>
+			{
+				var cancelHandler = this.CancelClick;
+				if (cancelHandler != null)
+				{
+					cancelHandler?.Invoke(this, EventArgs.Empty);
+				}
+				else
+				{
+					this.DismissWithAnimation();
+				}
+			};
+
+			SetTitleText(mTitleText);
+			SetContentText(mContentText);
+			SetCancelText(mCancelText);
+			SetConfirmText(mConfirmText);
+			ChangeAlertType(mAlertType, true);
 		}
 
-		private void restore () {
-			mCustomImage.Visibility = ViewStates.Gone;
-			mErrorFrame.Visibility = ViewStates.Gone;
-			mSuccessFrame.Visibility = ViewStates.Gone;
-			mWarningFrame.Visibility = ViewStates.Gone;
-			mProgressFrame.Visibility = ViewStates.Gone;
-			mConfirmButton.Visibility = ViewStates.Gone;
+		protected Animation CreateExitAnimation()
+		{
+			var exitAnimSet = new AnimationSet(true);
+			exitAnimSet.AddAnimation(new AlphaAnimation(0, 1) { Duration = 400 });
+			exitAnimSet.AddAnimation(new Rotate3dAnimation(0, 100, 0, 50, 50) { Duration = 400 });
 
-			mConfirmButton.SetBackgroundResource(Resource.Drawable.blue_button_background);
-			mErrorFrame.ClearAnimation();
-			mErrorX.ClearAnimation();
-			mSuccessTick.ClearAnimation();
-			mSuccessLeftMask.ClearAnimation();
-			mSuccessRightMask.ClearAnimation();
+			return exitAnimSet;
 		}
 
-		private void playAnimation () {
-			if (mAlertType == ERROR_TYPE) {
+		public void ChangeAlertType(int alertType)
+		{
+			this.ChangeAlertType(alertType, false);
+		}
+
+		public SweetAlertDialog SetTitleText(string text)
+		{
+			this.mTitleText = text;
+			if (this.mTitleTextView != null && this.mTitleText != null)
+			{
+				this.mTitleTextView.Text = this.mTitleText;
+			}
+
+			return this;
+		}
+
+		public SweetAlertDialog setCustomImage(Drawable drawable)
+		{
+			mCustomImgDrawable = drawable;
+			if (mCustomImage != null && mCustomImgDrawable != null)
+			{
+				mCustomImage.Visibility = ViewStates.Visible;
+				mCustomImage.SetImageDrawable(mCustomImgDrawable);
+			}
+			return this;
+		}
+
+		public SweetAlertDialog SetCustomImage(int resourceId)
+		{
+			return setCustomImage(this.Context.Resources.GetDrawable(resourceId));
+		}
+
+		public SweetAlertDialog SetContentText(string text)
+		{
+			mContentText = text;
+			if (mContentTextView != null && mContentText != null)
+			{
+				ShowContentText(true);
+				mContentTextView.Text = mContentText;
+			}
+			return this;
+		}
+
+		public SweetAlertDialog ShowCancelButton(bool isShow)
+		{
+			mShowCancel = isShow;
+			if (mCancelButton != null)
+			{
+				mCancelButton.Visibility = mShowCancel ? ViewStates.Visible : ViewStates.Gone;
+			}
+			return this;
+		}
+
+		public SweetAlertDialog ShowContentText(bool isShow)
+		{
+			mShowContent = isShow;
+			if (mContentTextView != null)
+			{
+				mContentTextView.Visibility = mShowContent ? ViewStates.Visible : ViewStates.Gone;
+			}
+			return this;
+		}
+
+		public SweetAlertDialog SetCancelText(string text)
+		{
+			this.mCancelText = text;
+			if (this.mCancelButton != null && this.mCancelText != null)
+			{
+				this.ShowCancelButton(true);
+				this.mCancelButton.Text = mCancelText;
+			}
+
+			return this;
+		}
+
+		public SweetAlertDialog SetConfirmText(string text)
+		{
+			this.mConfirmText = text;
+			if (this.mConfirmButton != null && this.mConfirmText != null)
+			{
+				this.mConfirmButton.Text = this.mConfirmText;
+			}
+
+			return this;
+		}
+
+		public SweetAlertDialog SetCancelClickListener(EventHandler handler)
+		{
+			this.CancelClick += handler;
+
+			return this;
+		}
+
+		public SweetAlertDialog SetConfirmClickListener(EventHandler handler)
+		{
+			this.ConfirmClick += handler;
+
+			return this;
+		}
+
+		protected override void OnStart()
+		{
+			base.OnStart();
+			this.mDialogView.StartAnimation(mModalInAnim);
+			this.PlayAnimation();
+		}
+
+		/// <summary>
+		/// The real Dialog.cancel() will be invoked async-ly after the animation finishes.
+		/// </summary>
+		public override void Cancel()
+		{
+			base.Cancel();
+			this.DismissWithAnimation(true);
+		}
+
+		/// <summary>
+		/// The real Dialog.dismiss() will be invoked async-ly after the animation finishes.
+		/// </summary>
+		public void DismissWithAnimation()
+		{
+			this.DismissWithAnimation(false);
+		}
+
+		private void PlayAnimation()
+		{
+			if (mAlertType == ERROR_TYPE)
+			{
 				mErrorFrame.StartAnimation(mErrorInAnim);
 				mErrorX.StartAnimation(mErrorXInAnim);
-			} else if (mAlertType == SUCCESS_TYPE) {
+			}
+			else if (mAlertType == SUCCESS_TYPE)
+			{
 				mSuccessTick.startTickAnim();
 				mSuccessRightMask.StartAnimation(mSuccessBowAnim);
 			}
 		}
 
-		private void changeAlertType(int alertType, bool fromCreate) {
+		private void ChangeAlertType(int alertType, bool fromCreate)
+		{
 			mAlertType = alertType;
 			// call after created views
-			if (mDialogView != null) {
-				if (!fromCreate) {
+			if (mDialogView != null)
+			{
+				if (!fromCreate)
+				{
 					// restore all of views state before switching alert type
-					restore();
+					Restore();
 				}
-				switch (mAlertType) {
+				switch (mAlertType)
+				{
 					case ERROR_TYPE:
 						mErrorFrame.Visibility = ViewStates.Visible;
 						break;
@@ -224,168 +367,54 @@ namespace SCLAlertView.Droid
 						mConfirmButton.Visibility = ViewStates.Gone;
 						break;
 				}
-				if (!fromCreate) {
-					playAnimation();
+				if (!fromCreate)
+				{
+					PlayAnimation();
 				}
 			}
 		}
 
-		public int getAlerType () {
-			return mAlertType;
-		}
 
-		public void changeAlertType(int alertType) {
-			changeAlertType(alertType, false);
-		}
-
-
-		public String getTitleText () {
-			return mTitleText;
-		}
-
-		public SweetAlertDialog setTitleText (String text) {
-			mTitleText = text;
-			if (mTitleTextView != null && mTitleText != null) {
-				mTitleTextView.Text = mTitleText;
-			}
-			return this;
-		}
-
-		public SweetAlertDialog setCustomImage (Drawable drawable) {
-			mCustomImgDrawable = drawable;
-			if (mCustomImage != null && mCustomImgDrawable != null) {
-				mCustomImage.Visibility = ViewStates.Visible;
-				mCustomImage.SetImageDrawable(mCustomImgDrawable);
-			}
-			return this;
-		}
-
-		public SweetAlertDialog setCustomImage (int resourceId) {
-			return setCustomImage(this.Context.Resources.GetDrawable(resourceId));
-		}
-
-		public String getContentText () {
-			return mContentText;
-		}
-
-		public SweetAlertDialog setContentText (String text) {
-			mContentText = text;
-			if (mContentTextView != null && mContentText != null) {
-				showContentText(true);
-				mContentTextView.Text = mContentText;
-			}
-			return this;
-		}
-
-		public bool isShowCancelButton () {
-			return mShowCancel;
-		}
-
-		public SweetAlertDialog showCancelButton (bool isShow) {
-			mShowCancel = isShow;
-			if (mCancelButton != null) {
-				mCancelButton.Visibility = mShowCancel ? ViewStates.Visible : ViewStates.Gone;
-			}
-			return this;
-		}
-
-		public bool isShowContentText () {
-			return mShowContent;
-		}
-
-		public SweetAlertDialog showContentText (bool isShow) {
-			mShowContent = isShow;
-			if (mContentTextView != null) {
-				mContentTextView.Visibility = mShowContent ? ViewStates.Visible : ViewStates.Gone;
-			}
-			return this;
-		}
-
-		public String getCancelText () {
-			return mCancelText;
-		}
-
-		public SweetAlertDialog setCancelText (String text) {
-			mCancelText = text;
-			if (mCancelButton != null && mCancelText != null) {
-				showCancelButton(true);
-				mCancelButton.Text = mCancelText;
-			}
-			return this;
-		}
-
-		public String getConfirmText () {
-			return mConfirmText;
-		}
-
-		public SweetAlertDialog setConfirmText (String text) {
-			mConfirmText = text;
-			if (mConfirmButton != null && mConfirmText != null) {
-				mConfirmButton.Text = mConfirmText;
-			}
-			return this;
-		}
-
-		public SweetAlertDialog setCancelClickListener (OnSweetClickListener listener) {
-			mCancelClickListener = listener;
-			return this;
-		}
-
-		public SweetAlertDialog setConfirmClickListener (OnSweetClickListener listener) {
-			mConfirmClickListener = listener;
-			return this;
-		}
-
-		protected override void OnStart()
+		private void Restore()
 		{
-			base.OnStart();
-			mDialogView.StartAnimation(mModalInAnim);
-			playAnimation();
+			this.mCustomImage.Visibility = ViewStates.Gone;
+			this.mErrorFrame.Visibility = ViewStates.Gone;
+			this.mSuccessFrame.Visibility = ViewStates.Gone;
+			this.mWarningFrame.Visibility = ViewStates.Gone;
+			this.mProgressFrame.Visibility = ViewStates.Gone;
+			this.mConfirmButton.Visibility = ViewStates.Gone;
+
+			this.mConfirmButton.SetBackgroundResource(Resource.Drawable.blue_button_background);
+			this.mErrorFrame.ClearAnimation();
+			this.mErrorX.ClearAnimation();
+			this.mSuccessTick.ClearAnimation();
+			this.mSuccessLeftMask.ClearAnimation();
+			this.mSuccessRightMask.ClearAnimation();
 		}
 
-		/// <summary>
-		/// The real Dialog.cancel() will be invoked async-ly after the animation finishes.
-		/// </summary>
-		public override void Cancel()
+		private void DismissWithAnimation(bool fromCancel)
 		{
-			base.Cancel();
-			dismissWithAnimation(true);
+			this.mCloseFromCancel = fromCancel;
+			this.mConfirmButton.StartAnimation(mOverlayOutAnim);
+			this.mDialogView.StartAnimation(mModalOutAnim);
 		}
 
-		/**
-     * The real Dialog.dismiss() will be invoked async-ly after the animation finishes.
-     */
-		public void dismissWithAnimation() {
-			dismissWithAnimation(false);
-		}
-
-		private void dismissWithAnimation(bool fromCancel) {
-			mCloseFromCancel = fromCancel;
-			mConfirmButton.StartAnimation(mOverlayOutAnim);
-			mDialogView.StartAnimation(mModalOutAnim);
-		}
-
-		protected void OnClick(object sender, EventArgs e)
+		protected class SelfAnimation : Animation
 		{
-			var v = (Button)sender;
-			if (v.Id == Resource.Id.cancel_button) {
-				if (mCancelClickListener != null) {
-					mCancelClickListener.onClick(this);
-				} else {
-					dismissWithAnimation();
-				}
-			} else if (v.Id == Resource.Id.confirm_button) {
-				if (mConfirmClickListener != null) {
-					mConfirmClickListener.onClick(this);
-				} else {
-					dismissWithAnimation();
-				}
+			private readonly Window window;
+
+			public SelfAnimation(Window window)
+			{
+				this.window = window;
+			}
+
+			protected override void ApplyTransformation(float interpolatedTime, Transformation t)
+			{
+				base.ApplyTransformation(interpolatedTime, t);
+				var wlp = this.window.Attributes;
+				wlp.Alpha = 1 - interpolatedTime;
+				this.window.Attributes = wlp;
 			}
 		}
-	
-
-		//public ProgressHelper getProgressHelper () {
-		//	return mProgressHelper;
-		//}
 	}
 }

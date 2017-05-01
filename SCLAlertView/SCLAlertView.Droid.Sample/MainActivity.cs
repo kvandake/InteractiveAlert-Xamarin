@@ -19,11 +19,11 @@ namespace SCLAlertView.Droid.Sample
 			// Get our button from the layout resource,
 			// and attach an event to it
 			Button button = FindViewById<Button>(Resource.Id.myButton);
-			button.Click += (s,e) =>
+			button.Click += (s, e) =>
 			{
 				new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-					.setTitleText("Good job!")
-					.setContentText("You clicked the button!")
+					.SetTitleText("Good job!")
+					.SetContentText("You clicked the button!")
 					.Show();
 			};
 		}

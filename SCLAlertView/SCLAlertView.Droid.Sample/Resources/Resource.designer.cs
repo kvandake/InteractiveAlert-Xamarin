@@ -26,17 +26,11 @@ namespace SCLAlertView.Droid.Sample
 		
 		public static void UpdateIdValues()
 		{
-			global::SCLAlertView.Droid.Resource.Animation.error_frame_in = global::SCLAlertView.Droid.Sample.Resource.Animation.error_frame_in;
 			global::SCLAlertView.Droid.Resource.Animation.error_x_in = global::SCLAlertView.Droid.Sample.Resource.Animation.error_x_in;
 			global::SCLAlertView.Droid.Resource.Animation.modal_in = global::SCLAlertView.Droid.Sample.Resource.Animation.modal_in;
 			global::SCLAlertView.Droid.Resource.Animation.modal_out = global::SCLAlertView.Droid.Sample.Resource.Animation.modal_out;
 			global::SCLAlertView.Droid.Resource.Animation.success_bow_roate = global::SCLAlertView.Droid.Sample.Resource.Animation.success_bow_roate;
 			global::SCLAlertView.Droid.Resource.Animation.success_mask_layout = global::SCLAlertView.Droid.Sample.Resource.Animation.success_mask_layout;
-			global::SCLAlertView.Droid.Resource.Attribute.fromDeg = global::SCLAlertView.Droid.Sample.Resource.Attribute.fromDeg;
-			global::SCLAlertView.Droid.Resource.Attribute.pivotX = global::SCLAlertView.Droid.Sample.Resource.Attribute.pivotX;
-			global::SCLAlertView.Droid.Resource.Attribute.pivotY = global::SCLAlertView.Droid.Sample.Resource.Attribute.pivotY;
-			global::SCLAlertView.Droid.Resource.Attribute.rollType = global::SCLAlertView.Droid.Sample.Resource.Attribute.rollType;
-			global::SCLAlertView.Droid.Resource.Attribute.toDeg = global::SCLAlertView.Droid.Sample.Resource.Attribute.toDeg;
 			global::SCLAlertView.Droid.Resource.Color.blue_btn_bg_color = global::SCLAlertView.Droid.Sample.Resource.Color.blue_btn_bg_color;
 			global::SCLAlertView.Droid.Resource.Color.blue_btn_bg_pressed_color = global::SCLAlertView.Droid.Sample.Resource.Color.blue_btn_bg_pressed_color;
 			global::SCLAlertView.Droid.Resource.Color.button_text_color = global::SCLAlertView.Droid.Sample.Resource.Color.button_text_color;
@@ -84,9 +78,6 @@ namespace SCLAlertView.Droid.Sample
 			global::SCLAlertView.Droid.Resource.Id.success_tick = global::SCLAlertView.Droid.Sample.Resource.Id.success_tick;
 			global::SCLAlertView.Droid.Resource.Id.title_text = global::SCLAlertView.Droid.Sample.Resource.Id.title_text;
 			global::SCLAlertView.Droid.Resource.Id.warning_frame = global::SCLAlertView.Droid.Sample.Resource.Id.warning_frame;
-			global::SCLAlertView.Droid.Resource.Id.x = global::SCLAlertView.Droid.Sample.Resource.Id.x;
-			global::SCLAlertView.Droid.Resource.Id.y = global::SCLAlertView.Droid.Sample.Resource.Id.y;
-			global::SCLAlertView.Droid.Resource.Id.z = global::SCLAlertView.Droid.Sample.Resource.Id.z;
 			global::SCLAlertView.Droid.Resource.Layout.alert_dialog = global::SCLAlertView.Droid.Sample.Resource.Layout.alert_dialog;
 			global::SCLAlertView.Droid.Resource.String.LOADING = global::SCLAlertView.Droid.Sample.Resource.String.LOADING;
 			global::SCLAlertView.Droid.Resource.String.app_name = global::SCLAlertView.Droid.Sample.Resource.String.app_name;
@@ -95,12 +86,6 @@ namespace SCLAlertView.Droid.Sample
 			global::SCLAlertView.Droid.Resource.String.dialog_ok = global::SCLAlertView.Droid.Sample.Resource.String.dialog_ok;
 			global::SCLAlertView.Droid.Resource.Style.alert_dialog = global::SCLAlertView.Droid.Sample.Resource.Style.alert_dialog;
 			global::SCLAlertView.Droid.Resource.Style.dialog_blue_button = global::SCLAlertView.Droid.Sample.Resource.Style.dialog_blue_button;
-			global::SCLAlertView.Droid.Resource.Styleable.Rotate3dAnimation = global::SCLAlertView.Droid.Sample.Resource.Styleable.Rotate3dAnimation;
-			global::SCLAlertView.Droid.Resource.Styleable.Rotate3dAnimation_fromDeg = global::SCLAlertView.Droid.Sample.Resource.Styleable.Rotate3dAnimation_fromDeg;
-			global::SCLAlertView.Droid.Resource.Styleable.Rotate3dAnimation_pivotX = global::SCLAlertView.Droid.Sample.Resource.Styleable.Rotate3dAnimation_pivotX;
-			global::SCLAlertView.Droid.Resource.Styleable.Rotate3dAnimation_pivotY = global::SCLAlertView.Droid.Sample.Resource.Styleable.Rotate3dAnimation_pivotY;
-			global::SCLAlertView.Droid.Resource.Styleable.Rotate3dAnimation_rollType = global::SCLAlertView.Droid.Sample.Resource.Styleable.Rotate3dAnimation_rollType;
-			global::SCLAlertView.Droid.Resource.Styleable.Rotate3dAnimation_toDeg = global::SCLAlertView.Droid.Sample.Resource.Styleable.Rotate3dAnimation_toDeg;
 		}
 		
 		public partial class Animation

@@ -28,22 +28,19 @@ namespace SCLAlertView.Droid
 		{
 			
 			// aapt resource value: 0x7f040000
-			public static int error_frame_in = 2130968576;
+			public static int error_x_in = 2130968576;
 			
 			// aapt resource value: 0x7f040001
-			public static int error_x_in = 2130968577;
+			public static int modal_in = 2130968577;
 			
 			// aapt resource value: 0x7f040002
-			public static int modal_in = 2130968578;
+			public static int modal_out = 2130968578;
 			
 			// aapt resource value: 0x7f040003
-			public static int modal_out = 2130968579;
+			public static int success_bow_roate = 2130968579;
 			
 			// aapt resource value: 0x7f040004
-			public static int success_bow_roate = 2130968580;
-			
-			// aapt resource value: 0x7f040005
-			public static int success_mask_layout = 2130968581;
+			public static int success_mask_layout = 2130968580;
 			
 			static Animation()
 			{
@@ -57,21 +54,6 @@ namespace SCLAlertView.Droid
 		
 		public partial class Attribute
 		{
-			
-			// aapt resource value: 0x7f010001
-			public static int fromDeg = 2130771969;
-			
-			// aapt resource value: 0x7f010003
-			public static int pivotX = 2130771971;
-			
-			// aapt resource value: 0x7f010004
-			public static int pivotY = 2130771972;
-			
-			// aapt resource value: 0x7f010000
-			public static int rollType = 2130771968;
-			
-			// aapt resource value: 0x7f010002
-			public static int toDeg = 2130771970;
 			
 			static Attribute()
 			{
@@ -221,59 +203,50 @@ namespace SCLAlertView.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f090010
-			public static int cancel_button = 2131296272;
-			
-			// aapt resource value: 0x7f090011
-			public static int confirm_button = 2131296273;
-			
-			// aapt resource value: 0x7f09000f
-			public static int content_text = 2131296271;
-			
-			// aapt resource value: 0x7f090004
-			public static int custom_image = 2131296260;
-			
-			// aapt resource value: 0x7f090005
-			public static int error_frame = 2131296261;
-			
-			// aapt resource value: 0x7f090006
-			public static int error_x = 2131296262;
-			
-			// aapt resource value: 0x7f090003
-			public static int loading = 2131296259;
-			
-			// aapt resource value: 0x7f090009
-			public static int mask_left = 2131296265;
-			
-			// aapt resource value: 0x7f090008
-			public static int mask_right = 2131296264;
-			
 			// aapt resource value: 0x7f09000d
-			public static int progressWheel = 2131296269;
-			
-			// aapt resource value: 0x7f09000c
-			public static int progress_dialog = 2131296268;
-			
-			// aapt resource value: 0x7f090007
-			public static int success_frame = 2131296263;
-			
-			// aapt resource value: 0x7f09000a
-			public static int success_tick = 2131296266;
+			public static int cancel_button = 2131296269;
 			
 			// aapt resource value: 0x7f09000e
-			public static int title_text = 2131296270;
+			public static int confirm_button = 2131296270;
 			
-			// aapt resource value: 0x7f09000b
-			public static int warning_frame = 2131296267;
-			
-			// aapt resource value: 0x7f090000
-			public static int x = 2131296256;
+			// aapt resource value: 0x7f09000c
+			public static int content_text = 2131296268;
 			
 			// aapt resource value: 0x7f090001
-			public static int y = 2131296257;
+			public static int custom_image = 2131296257;
 			
 			// aapt resource value: 0x7f090002
-			public static int z = 2131296258;
+			public static int error_frame = 2131296258;
+			
+			// aapt resource value: 0x7f090003
+			public static int error_x = 2131296259;
+			
+			// aapt resource value: 0x7f090000
+			public static int loading = 2131296256;
+			
+			// aapt resource value: 0x7f090006
+			public static int mask_left = 2131296262;
+			
+			// aapt resource value: 0x7f090005
+			public static int mask_right = 2131296261;
+			
+			// aapt resource value: 0x7f09000a
+			public static int progressWheel = 2131296266;
+			
+			// aapt resource value: 0x7f090009
+			public static int progress_dialog = 2131296265;
+			
+			// aapt resource value: 0x7f090004
+			public static int success_frame = 2131296260;
+			
+			// aapt resource value: 0x7f090007
+			public static int success_tick = 2131296263;
+			
+			// aapt resource value: 0x7f09000b
+			public static int title_text = 2131296267;
+			
+			// aapt resource value: 0x7f090008
+			public static int warning_frame = 2131296264;
 			
 			static Id()
 			{
@@ -344,42 +317,6 @@ namespace SCLAlertView.Droid
 			}
 			
 			private Style()
-			{
-			}
-		}
-		
-		public partial class Styleable
-		{
-			
-			public static int[] Rotate3dAnimation = new int[]
-			{
-					2130771968,
-					2130771969,
-					2130771970,
-					2130771971,
-					2130771972};
-			
-			// aapt resource value: 1
-			public static int Rotate3dAnimation_fromDeg = 1;
-			
-			// aapt resource value: 3
-			public static int Rotate3dAnimation_pivotX = 3;
-			
-			// aapt resource value: 4
-			public static int Rotate3dAnimation_pivotY = 4;
-			
-			// aapt resource value: 0
-			public static int Rotate3dAnimation_rollType = 0;
-			
-			// aapt resource value: 2
-			public static int Rotate3dAnimation_toDeg = 2;
-			
-			static Styleable()
-			{
-				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
-			}
-			
-			private Styleable()
 			{
 			}
 		}

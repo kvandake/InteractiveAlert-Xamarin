@@ -72,7 +72,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
-    <AndroidResource Include="Resources\anim\error_frame_in.xml" />
     <AndroidResource Include="Resources\anim\error_x_in.xml" />
     <AndroidResource Include="Resources\anim\modal_in.xml" />
     <AndroidResource Include="Resources\anim\modal_out.xml" />
@@ -89,7 +88,6 @@
     <AndroidResource Include="Resources\drawable\success_circle.xml" />
     <AndroidResource Include="Resources\drawable\warning_circle.xml" />
     <AndroidResource Include="Resources\drawable\warning_sigh.xml" />
-    <AndroidResource Include="Resources\values\attrs.xml" />
     <AndroidResource Include="Resources\values\colors.xml" />
     <AndroidResource Include="Resources\values\dimen.xml" />
     <AndroidResource Include="Resources\values\styles.xml" />
