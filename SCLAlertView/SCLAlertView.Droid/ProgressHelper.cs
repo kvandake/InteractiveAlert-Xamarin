@@ -1,11 +1,12 @@
 ﻿using System;
 using Android.Content;
+using Android.Widget;
 
 namespace SCLAlertView.Droid
 {
 	public class ProgressHelper
 	{
-		private ProgressWheel mProgressWheel;
+		private ProgressBar mProgressWheel;
 		private bool mToSpin;
 		private float mSpinSpeed;
 		private int mBarWidth;
@@ -28,11 +29,11 @@ namespace SCLAlertView.Droid
 			mCircleRadius = ctx.Resources.GetDimensionPixelOffset((R.dimen.progress_circle_radius);
 		}
 
-		public ProgressWheel getProgressWheel () {
+		public ProgressBar getProgressWheel () {
 			return mProgressWheel;
 		}
 
-		public void setProgressWheel (ProgressWheel progressWheel) {
+		public void setProgressWheel (ProgressBar progressWheel) {
 			mProgressWheel = progressWheel;
 			updatePropsIfNeed();
 		}
@@ -48,7 +49,7 @@ namespace SCLAlertView.Droid
 					mProgressWheel.setSpinSpeed(mSpinSpeed);
 				}
 				if (mBarWidth != mProgressWheel.getBarWidth()) {
-					mProgressWheel.setBarWidth(mBarWidth);
+						mProgressWheel.Width = mBarWidth;
 				}
 				if (mBarColor != mProgressWheel.getBarColor()) {
 					mProgressWheel.setBarColor(mBarColor);

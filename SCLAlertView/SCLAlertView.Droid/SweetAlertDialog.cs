@@ -13,7 +13,7 @@ namespace SCLAlertView.Droid
 	/// <summary>
 	/// https://github.com/pedant/sweet-alert-dialog
 	/// </summary>
-	public class SweetAlertDialog : Dialog , View.OnClickListener
+	public class SweetAlertDialog : Dialog
 	{
 		private View mDialogView;
 		private AnimationSet mModalInAnim;
@@ -43,18 +43,18 @@ namespace SCLAlertView.Droid
 		private ImageView mCustomImage;
 		private Button mConfirmButton;
 		private Button mCancelButton;
-		private ProgressHelper mProgressHelper;
+		//private ProgressHelper mProgressHelper;
 		private FrameLayout mWarningFrame;
 		private OnSweetClickListener mCancelClickListener;
 		private OnSweetClickListener mConfirmClickListener;
 		private bool mCloseFromCancel;
 
-		public static readonly int NORMAL_TYPE = 0;
-		public static readonly int ERROR_TYPE = 1;
-		public static readonly int SUCCESS_TYPE = 2;
-		public static readonly int WARNING_TYPE = 3;
-		public static readonly int CUSTOM_IMAGE_TYPE = 4;
-		public static readonly int PROGRESS_TYPE = 5;
+		public const int NORMAL_TYPE = 0;
+		public const int ERROR_TYPE = 1;
+		public const int SUCCESS_TYPE = 2;
+		public const int WARNING_TYPE = 3;
+		public const int CUSTOM_IMAGE_TYPE = 4;
+		public const int PROGRESS_TYPE = 5;
 
 		public interface OnSweetClickListener {
 			void onClick (SweetAlertDialog sweetAlertDialog);
@@ -67,10 +67,16 @@ namespace SCLAlertView.Droid
 		public SweetAlertDialog(Context context, int alertType):base(context,Resource.Style.alert_dialog) {
 			SetCancelable(true);
 			SetCanceledOnTouchOutside(false);
-			mProgressHelper = new ProgressHelper(context);
+			//mProgressHelper = new ProgressHelper(context);
 			mAlertType = alertType;
-			mErrorInAnim = OptAnimationLoader.loadAnimation(context, Resource.Animation.error_frame_in);
-			mErrorXInAnim = (AnimationSet)OptAnimationLoader.loadAnimation(context, Resource.Animation.error_x_in);
+			var errorAnimSet = new AnimationSet(true);
+			errorAnimSet.AddAnimation(new AlphaAnimation(0,1) { Duration = 400});
+			errorAnimSet.AddAnimation(new Rotate3dAnimation(0,100,0,50,50) {Duration = 400});
+			mErrorInAnim = errorAnimSet;
+
+			// mErrorInAnim = AnimationUtils.LoadAnimation(context, Resource.Animation.error_frame_in);
+			mErrorXInAnim =(AnimationSet)AnimationUtils.LoadAnimation(context, Resource.Animation.error_x_in);
+
 			// 2.3.x system don't support alpha-animation on layer-list drawable
 			// remove it from animation set
 			if (Build.VERSION.SdkInt <= BuildVersionCodes.GingerbreadMr1) {
@@ -92,19 +98,19 @@ namespace SCLAlertView.Droid
 					childAnims.RemoveAt(idx);
 				}
 			}
-			mSuccessBowAnim = OptAnimationLoader.loadAnimation(context,  Resource.Animation.success_bow_roate);
-			mSuccessLayoutAnimSet = (AnimationSet)OptAnimationLoader.loadAnimation(context, Resource.Animation.success_mask_layout);
-			mModalInAnim = (AnimationSet) OptAnimationLoader.loadAnimation(context, Resource.Animation.modal_in);
-			mModalOutAnim = (AnimationSet) OptAnimationLoader.loadAnimation(context, Resource.Animation.modal_out);
+			mSuccessBowAnim = AnimationUtils.LoadAnimation(context,  Resource.Animation.success_bow_roate);
+			mSuccessLayoutAnimSet = (AnimationSet)AnimationUtils.LoadAnimation(context, Resource.Animation.success_mask_layout);
+			mModalInAnim = (AnimationSet) AnimationUtils.LoadAnimation(context, Resource.Animation.modal_in);
+			mModalOutAnim = (AnimationSet) AnimationUtils.LoadAnimation(context, Resource.Animation.modal_out);
 			mModalOutAnim.AnimationEnd+=(s,e)=>
 			{
 				mDialogView.Visibility = ViewStates.Gone;
 				mDialogView.Post(()=>
 				{
 					if (mCloseFromCancel) {
-						SweetAlertDialog.cancel();
+						this.Cancel();
 					} else {
-						SweetAlertDialog.dismiss();
+						this.Dismiss();
 					}					
 				});
 			};
@@ -131,66 +137,64 @@ namespace SCLAlertView.Droid
 				window.Attributes  =wlp;
 			}
 		}
-	
 
-		protected void onCreate(Bundle savedInstanceState) {
-			base.onCreate(savedInstanceState);
-	
-			SetContentView(R.layout.alert_dialog);
+		protected override void OnCreate(Bundle savedInstanceState)
+		{
+			base.OnCreate(savedInstanceState);
 
-			mDialogView = this.Window.getDecorView().findViewById(android.R.id.content);
-			mTitleTextView = (TextView)findViewById(R.id.title_text);
-			mContentTextView = (TextView)findViewById(R.id.content_text);
-			mErrorFrame = (FrameLayout)findViewById(R.id.error_frame);
-			mErrorX = (ImageView)mErrorFrame.findViewById(R.id.error_x);
-			mSuccessFrame = (FrameLayout)findViewById(R.id.success_frame);
-			mProgressFrame = (FrameLayout)findViewById(R.id.progress_dialog);
-			mSuccessTick = (SuccessTickView)mSuccessFrame.findViewById(R.id.success_tick);
-			mSuccessLeftMask = mSuccessFrame.findViewById(R.id.mask_left);
-			mSuccessRightMask = mSuccessFrame.findViewById(R.id.mask_right);
-			mCustomImage = (ImageView)findViewById(R.id.custom_image);
-			mWarningFrame = (FrameLayout)findViewById(R.id.warning_frame);
-			mConfirmButton = (Button)findViewById(R.id.confirm_button);
-			mCancelButton = (Button)findViewById(R.id.cancel_button);
-			mProgressHelper.setProgressWheel((ProgressWheel)findViewById(R.id.progressWheel));
-			mConfirmButton.setOnClickListener(this);
-			mCancelButton.setOnClickListener(this);
+			SetContentView(Resource.Layout.alert_dialog);
+			mDialogView = this.Window.DecorView.FindViewById(Android.Resource.Id.Content);
+			mTitleTextView = (TextView)FindViewById(Resource.Id.title_text);
+			mContentTextView = (TextView)FindViewById(Resource.Id.content_text);
+			mErrorFrame = (FrameLayout)FindViewById(Resource.Id.error_frame);
+			mErrorX = (ImageView)mErrorFrame.FindViewById(Resource.Id.error_x);
+			mSuccessFrame = (FrameLayout)FindViewById(Resource.Id.success_frame);
+			mProgressFrame = (FrameLayout)FindViewById(Resource.Id.progress_dialog);
+			mSuccessTick = (SuccessTickView)mSuccessFrame.FindViewById(Resource.Id.success_tick);
+			mSuccessLeftMask = mSuccessFrame.FindViewById(Resource.Id.mask_left);
+			mSuccessRightMask = mSuccessFrame.FindViewById(Resource.Id.mask_right);
+			mCustomImage = (ImageView)FindViewById(Resource.Id.custom_image);
+			mWarningFrame = (FrameLayout)FindViewById(Resource.Id.warning_frame);
+			mConfirmButton = (Button)FindViewById(Resource.Id.confirm_button);
+			mCancelButton = (Button)FindViewById(Resource.Id.cancel_button);
+			//mProgressHelper.setProgressWheel((ProgressBar)FindViewById(Resource.Id.progressWheel));
+			mConfirmButton.Click+=this.OnClick;
+			mCancelButton.Click+=this.OnClick;
 
 			setTitleText(mTitleText);
 			setContentText(mContentText);
 			setCancelText(mCancelText);
 			setConfirmText(mConfirmText);
 			changeAlertType(mAlertType, true);
-
 		}
 
 		private void restore () {
-			mCustomImage.setVisibility(View.GONE);
-			mErrorFrame.setVisibility(View.GONE);
-			mSuccessFrame.setVisibility(View.GONE);
-			mWarningFrame.setVisibility(View.GONE);
-			mProgressFrame.setVisibility(View.GONE);
-			mConfirmButton.setVisibility(View.VISIBLE);
+			mCustomImage.Visibility = ViewStates.Gone;
+			mErrorFrame.Visibility = ViewStates.Gone;
+			mSuccessFrame.Visibility = ViewStates.Gone;
+			mWarningFrame.Visibility = ViewStates.Gone;
+			mProgressFrame.Visibility = ViewStates.Gone;
+			mConfirmButton.Visibility = ViewStates.Gone;
 
-			mConfirmButton.setBackgroundResource(R.drawable.blue_button_background);
-			mErrorFrame.clearAnimation();
-			mErrorX.clearAnimation();
-			mSuccessTick.clearAnimation();
-			mSuccessLeftMask.clearAnimation();
-			mSuccessRightMask.clearAnimation();
+			mConfirmButton.SetBackgroundResource(Resource.Drawable.blue_button_background);
+			mErrorFrame.ClearAnimation();
+			mErrorX.ClearAnimation();
+			mSuccessTick.ClearAnimation();
+			mSuccessLeftMask.ClearAnimation();
+			mSuccessRightMask.ClearAnimation();
 		}
 
 		private void playAnimation () {
 			if (mAlertType == ERROR_TYPE) {
-				mErrorFrame.startAnimation(mErrorInAnim);
-				mErrorX.startAnimation(mErrorXInAnim);
+				mErrorFrame.StartAnimation(mErrorInAnim);
+				mErrorX.StartAnimation(mErrorXInAnim);
 			} else if (mAlertType == SUCCESS_TYPE) {
 				mSuccessTick.startTickAnim();
-				mSuccessRightMask.startAnimation(mSuccessBowAnim);
+				mSuccessRightMask.StartAnimation(mSuccessBowAnim);
 			}
 		}
 
-		private void changeAlertType(int alertType, boolean fromCreate) {
+		private void changeAlertType(int alertType, bool fromCreate) {
 			mAlertType = alertType;
 			// call after created views
 			if (mDialogView != null) {
@@ -200,24 +204,24 @@ namespace SCLAlertView.Droid
 				}
 				switch (mAlertType) {
 					case ERROR_TYPE:
-						mErrorFrame.setVisibility(View.VISIBLE);
+						mErrorFrame.Visibility = ViewStates.Visible;
 						break;
 					case SUCCESS_TYPE:
-						mSuccessFrame.setVisibility(View.VISIBLE);
+						mSuccessFrame.Visibility = ViewStates.Visible;
 						// initial rotate layout of success mask
-						mSuccessLeftMask.startAnimation(mSuccessLayoutAnimSet.getAnimations().get(0));
-						mSuccessRightMask.startAnimation(mSuccessLayoutAnimSet.getAnimations().get(1));
+						mSuccessLeftMask.StartAnimation(mSuccessLayoutAnimSet.Animations[0]);
+						mSuccessRightMask.StartAnimation(mSuccessLayoutAnimSet.Animations[1]);
 						break;
 					case WARNING_TYPE:
-						mConfirmButton.setBackgroundResource(R.drawable.red_button_background);
-						mWarningFrame.setVisibility(View.VISIBLE);
+						mConfirmButton.SetBackgroundResource(Resource.Drawable.red_button_background);
+						mWarningFrame.Visibility = ViewStates.Visible;
 						break;
 					case CUSTOM_IMAGE_TYPE:
 						setCustomImage(mCustomImgDrawable);
 						break;
 					case PROGRESS_TYPE:
-						mProgressFrame.setVisibility(View.VISIBLE);
-						mConfirmButton.setVisibility(View.GONE);
+						mProgressFrame.Visibility = ViewStates.Visible;
+						mConfirmButton.Visibility = ViewStates.Gone;
 						break;
 				}
 				if (!fromCreate) {
@@ -242,7 +246,7 @@ namespace SCLAlertView.Droid
 		public SweetAlertDialog setTitleText (String text) {
 			mTitleText = text;
 			if (mTitleTextView != null && mTitleText != null) {
-				mTitleTextView.setText(mTitleText);
+				mTitleTextView.Text = mTitleText;
 			}
 			return this;
 		}
@@ -250,14 +254,14 @@ namespace SCLAlertView.Droid
 		public SweetAlertDialog setCustomImage (Drawable drawable) {
 			mCustomImgDrawable = drawable;
 			if (mCustomImage != null && mCustomImgDrawable != null) {
-				mCustomImage.setVisibility(View.VISIBLE);
-				mCustomImage.setImageDrawable(mCustomImgDrawable);
+				mCustomImage.Visibility = ViewStates.Visible;
+				mCustomImage.SetImageDrawable(mCustomImgDrawable);
 			}
 			return this;
 		}
 
 		public SweetAlertDialog setCustomImage (int resourceId) {
-			return setCustomImage(getContext().getResources().getDrawable(resourceId));
+			return setCustomImage(this.Context.Resources.GetDrawable(resourceId));
 		}
 
 		public String getContentText () {
@@ -268,31 +272,31 @@ namespace SCLAlertView.Droid
 			mContentText = text;
 			if (mContentTextView != null && mContentText != null) {
 				showContentText(true);
-				mContentTextView.setText(mContentText);
+				mContentTextView.Text = mContentText;
 			}
 			return this;
 		}
 
-		public boolean isShowCancelButton () {
+		public bool isShowCancelButton () {
 			return mShowCancel;
 		}
 
-		public SweetAlertDialog showCancelButton (boolean isShow) {
+		public SweetAlertDialog showCancelButton (bool isShow) {
 			mShowCancel = isShow;
 			if (mCancelButton != null) {
-				mCancelButton.setVisibility(mShowCancel ? View.VISIBLE : View.GONE);
+				mCancelButton.Visibility = mShowCancel ? ViewStates.Visible : ViewStates.Gone;
 			}
 			return this;
 		}
 
-		public boolean isShowContentText () {
+		public bool isShowContentText () {
 			return mShowContent;
 		}
 
-		public SweetAlertDialog showContentText (boolean isShow) {
+		public SweetAlertDialog showContentText (bool isShow) {
 			mShowContent = isShow;
 			if (mContentTextView != null) {
-				mContentTextView.setVisibility(mShowContent ? View.VISIBLE : View.GONE);
+				mContentTextView.Visibility = mShowContent ? ViewStates.Visible : ViewStates.Gone;
 			}
 			return this;
 		}
@@ -305,7 +309,7 @@ namespace SCLAlertView.Droid
 			mCancelText = text;
 			if (mCancelButton != null && mCancelText != null) {
 				showCancelButton(true);
-				mCancelButton.setText(mCancelText);
+				mCancelButton.Text = mCancelText;
 			}
 			return this;
 		}
@@ -317,7 +321,7 @@ namespace SCLAlertView.Droid
 		public SweetAlertDialog setConfirmText (String text) {
 			mConfirmText = text;
 			if (mConfirmButton != null && mConfirmText != null) {
-				mConfirmButton.setText(mConfirmText);
+				mConfirmButton.Text = mConfirmText;
 			}
 			return this;
 		}
@@ -332,16 +336,19 @@ namespace SCLAlertView.Droid
 			return this;
 		}
 
-		protected void onStart() {
-			mDialogView.startAnimation(mModalInAnim);
+		protected override void OnStart()
+		{
+			base.OnStart();
+			mDialogView.StartAnimation(mModalInAnim);
 			playAnimation();
 		}
 
-		/**
-     * The real Dialog.cancel() will be invoked async-ly after the animation finishes.
-     */
-		@Override
-		public void cancel() {
+		/// <summary>
+		/// The real Dialog.cancel() will be invoked async-ly after the animation finishes.
+		/// </summary>
+		public override void Cancel()
+		{
+			base.Cancel();
 			dismissWithAnimation(true);
 		}
 
@@ -352,31 +359,33 @@ namespace SCLAlertView.Droid
 			dismissWithAnimation(false);
 		}
 
-		private void dismissWithAnimation(boolean fromCancel) {
+		private void dismissWithAnimation(bool fromCancel) {
 			mCloseFromCancel = fromCancel;
-			mConfirmButton.startAnimation(mOverlayOutAnim);
-			mDialogView.startAnimation(mModalOutAnim);
+			mConfirmButton.StartAnimation(mOverlayOutAnim);
+			mDialogView.StartAnimation(mModalOutAnim);
 		}
 
-		@Override
-		public void onClick(View v) {
-			if (v.getId() == R.id.cancel_button) {
+		protected void OnClick(object sender, EventArgs e)
+		{
+			var v = (Button)sender;
+			if (v.Id == Resource.Id.cancel_button) {
 				if (mCancelClickListener != null) {
-					mCancelClickListener.onClick(SweetAlertDialog.this);
+					mCancelClickListener.onClick(this);
 				} else {
 					dismissWithAnimation();
 				}
-			} else if (v.getId() == R.id.confirm_button) {
+			} else if (v.Id == Resource.Id.confirm_button) {
 				if (mConfirmClickListener != null) {
-					mConfirmClickListener.onClick(SweetAlertDialog.this);
+					mConfirmClickListener.onClick(this);
 				} else {
 					dismissWithAnimation();
 				}
 			}
 		}
+	
 
-		public ProgressHelper getProgressHelper () {
-			return mProgressHelper;
-		}
+		//public ProgressHelper getProgressHelper () {
+		//	return mProgressHelper;
+		//}
 	}
 }
