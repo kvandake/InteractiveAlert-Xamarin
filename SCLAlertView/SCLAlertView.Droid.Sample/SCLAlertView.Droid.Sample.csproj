@@ -96,9 +96,13 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SCLAlertView.Droid\SCLAlertView.Droid.csproj">
-      <Project>{A4757CDA-CADE-4413-93AE-D5CB6E1C03A8}</Project>
-      <Name>SCLAlertView.Droid</Name>
+    <ProjectReference Include="..\InteractiveAlert.Core\InteractiveAlert.Core.csproj">
+      <Project>{F137342A-B2E7-451E-A783-5A533F440761}</Project>
+      <Name>InteractiveAlert.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InteractiveAlert.Droid\InteractiveAlert.Droid.csproj">
+      <Project>{7C40A7E0-6338-4AC0-9139-2001A09E08A1}</Project>
+      <Name>InteractiveAlert.Droid</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

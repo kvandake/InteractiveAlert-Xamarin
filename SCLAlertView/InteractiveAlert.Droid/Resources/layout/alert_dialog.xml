@@ -14,7 +14,7 @@
         android:id="@+id/alert_dialog_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="center_horizontal" />
 
     <TextView
         android:id="@+id/alert_dialog_title"
@@ -37,19 +37,12 @@
         tools:text="Sample content" />
 
     <LinearLayout
-        android:id="@+id/alert_dialog_inputs"
+        android:id="@+id/alert_dialog_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/base_margin"
         android:gravity="center"
-        android:orientation="vertical" />
-
-    <LinearLayout
-        android:id="@+id/alert_dialog_buttons"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/base_margin"
-        android:gravity="center"
-        android:orientation="vertical" />
+        android:orientation="vertical"
+        android:visibility="gone" />
 
 </LinearLayout>

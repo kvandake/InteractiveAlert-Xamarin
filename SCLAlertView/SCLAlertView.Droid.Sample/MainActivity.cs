@@ -2,6 +2,8 @@
 using Android.Widget;
 using Android.OS;
 using Android.Support.V7.App;
+using InteractiveAlert.Droid;
+using InteractiveAlert;
 
 namespace SCLAlertView.Droid.Sample
 {
@@ -22,18 +24,31 @@ namespace SCLAlertView.Droid.Sample
 			Button button = FindViewById<Button>(Resource.Id.myButton);
 			button.Click += (s, e) =>
 			{
-				var dialogAlert = new SCLAlertDialog(Core.InteractiveAlertStyle.Warning);
-				dialogAlert.SetTitleText("Good job!");
-				dialogAlert.SetContentText("You clicked the button!");
+				var config = new InteractiveAlertConfig
+				{
+					OkButton = new InteractiveActionButton(),
+					CancelButton = new InteractiveActionButton(),
+					Message = "You clicked the button!",
+					Title = "Good job!",
+					Style = InteractiveAlertStyle.Success
+				};
+				var dialogAlert = InteractiveDialogFragment.NewInstance<InteractiveDialogFragment>(config);
 				dialogAlert.Show(this.SupportFragmentManager, "success");
-				dialogAlert.SetShowOk(true);
-				dialogAlert.SetShowCancel(true);
-				return;
+			};
 
-				new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-					.SetTitleText("Good job!")
-					.SetContentText("You clicked the button!")
-					.Show();
+			Button editableButton = FindViewById<Button>(Resource.Id.editable_button);
+			editableButton.Click += (s, e) =>
+			{
+				var config = new EditableInteractiveAlertConfig
+				{
+					OkButton = new InteractiveActionButton(),
+					CancelButton = new InteractiveActionButton(),
+					Message = "You clicked the button!",
+					Title = "Good job!",
+					Style = InteractiveAlertStyle.Success
+				};
+				var dialogAlert = EditableInteractiveDialogFragment.NewInstance<EditableInteractiveDialogFragment>(config);
+				dialogAlert.Show(this.SupportFragmentManager, "success");
 			};
 		}
 	}

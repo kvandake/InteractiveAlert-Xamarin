@@ -73,7 +73,6 @@
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rotate3dAnimation.cs" />
-    <Compile Include="SCLAlertDialogFragment.cs" />
     <Compile Include="SuccessTickView.cs" />
     <Compile Include="TopViewHolders\BaseTopContentViewHolder.cs" />
     <Compile Include="TopViewHolders\ErrorTopContentViewHolder.cs" />
@@ -83,6 +82,9 @@
     <Compile Include="TopViewHolders\WaitTopContentViewHolder.cs" />
     <Compile Include="TopViewHolders\WarningTopContentViewHolder.cs" />
     <Compile Include="InteractiveAlertsImpl.cs" />
+    <Compile Include="Alerts\EditableInteractiveDialogFragment.cs" />
+    <Compile Include="Alerts\InteractiveDialogFragment.cs" />
+    <Compile Include="Alerts\BaseInteractiveDialogFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -93,6 +95,7 @@
     <Folder Include="Resources\drawable\" />
     <Folder Include="Resources\layout\" />
     <Folder Include="Resources\values\" />
+    <Folder Include="Alerts\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\anim\error_x_in.xml" />

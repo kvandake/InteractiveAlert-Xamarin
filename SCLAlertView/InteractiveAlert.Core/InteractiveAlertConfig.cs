@@ -14,10 +14,6 @@ namespace InteractiveAlert
 
 		public string Message { get; set; }
 
-		public string OkText { get; set; } = DefaultOkText;
-
-		public string CancelText { get; set; } = DefaultCancelText;
-
 		public InteractiveActionButton OkButton { get; set; }
 
 		public InteractiveActionButton CancelButton { get; set; }

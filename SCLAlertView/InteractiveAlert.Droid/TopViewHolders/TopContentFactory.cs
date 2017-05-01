@@ -1,6 +1,5 @@
 ﻿using System;
 using Android.Content;
-using InteractiveAlert.Core;
 using Android.Views;
 
 namespace InteractiveAlert.Droid
