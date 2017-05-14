@@ -1,2 +1,2 @@
 # SCLAlertView-Xamarin
-Port SCLAlertView to Xamarin
+Interactive Alerts for Xamarin
