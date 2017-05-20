@@ -27,7 +27,7 @@ namespace InteractiveAlert.iOS.Sample
             };
 
             this.View.AddSubview(this.stackView);
-            this.viewModel = new SampleViewModel(InteractiveAlerts.Instance);
+            this.viewModel = new SampleViewModel();
             foreach (var item in this.viewModel.Items)
             {
                 var button = new UIButton(UIButtonType.System);

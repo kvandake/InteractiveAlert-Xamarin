@@ -7,9 +7,9 @@
     {
         private readonly IInteractiveAlerts interactiveAlerts;
 
-        public SampleViewModel(IInteractiveAlerts interactiveAlerts)
+        public SampleViewModel()
         {
-            this.interactiveAlerts = interactiveAlerts;
+            this.interactiveAlerts = InteractiveAlerts.Instance;
             this.PopulateItems();
         }
 

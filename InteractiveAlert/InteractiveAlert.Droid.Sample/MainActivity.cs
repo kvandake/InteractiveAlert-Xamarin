@@ -17,7 +17,7 @@ namespace InteractiveAlert.Droid.Sample
         {
             base.OnCreate(savedInstanceState);
             InteractiveAlerts.Init(() => this);
-            this.viewModel = new SampleViewModel(InteractiveAlerts.Instance);
+            this.viewModel = new SampleViewModel();
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
             var linearLayout = this.FindViewById<LinearLayout>(Resource.Id.main_linear_layout);

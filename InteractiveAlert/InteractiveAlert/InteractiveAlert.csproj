@@ -3,43 +3,39 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D515B166-36F9-40D3-A455-2526993F0A1E}</ProjectGuid>
+    <ProjectGuid>{F8DCEDF2-7FEB-49CB-82DE-C064346829C6}</ProjectGuid>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <UseMSBuildEngine>true</UseMSBuildEngine>
     <OutputType>Library</OutputType>
-    <RootNamespace>InteractiveAlert.Sample</RootNamespace>
-    <AssemblyName>InteractiveAlert.Sample</AssemblyName>
+    <RootNamespace>InteractiveAlert</RootNamespace>
+    <AssemblyName>InteractiveAlert</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
+    <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
+    <DefineConstants>DEBUG;PCL;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
+    <DefineConstants>PCL</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SampleViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\InteractiveAlert\InteractiveAlert.csproj">
-      <Project>{F8DCEDF2-7FEB-49CB-82DE-C064346829C6}</Project>
-      <Name>InteractiveAlert</Name>
-    </ProjectReference>
     <ProjectReference Include="..\InteractiveAlert.Core\InteractiveAlert.Core.csproj">
       <Project>{F137342A-B2E7-451E-A783-5A533F440761}</Project>
       <Name>InteractiveAlert.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="..\InteractiveAlert.Shared\InteractiveAlert.Shared.projitems" Label="Shared" Condition="Exists('..\InteractiveAlert.Shared\InteractiveAlert.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>
