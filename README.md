@@ -14,7 +14,7 @@ A cross platform library that allows you to call for interactive alerts from a s
 
 InteractiveAlerts setup as [Acr.UserDialogs](https://github.com/aritchie/userdialogs).
 
-#### iOS and Windows
+#### iOS
 
     The library configures.
 
