@@ -1,7 +1,9 @@
 # ACR User Dialogs for Xamarin and Windows
 
 A cross platform library that allows you to call for interactive alerts from a shared/portable library.
-Supports 
+
+### Support:
+
 * Android
 * iOS
 * Portable library
