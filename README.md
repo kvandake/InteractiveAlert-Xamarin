@@ -8,7 +8,7 @@ A cross platform library that allows you to call for interactive alerts from a s
 * iOS
 * Portable library
 
-[![NuGet](https://img.shields.io/badge/InteractiveAlerts-0.1.3-brightgreen.svg)](https://www.nuget.org/packages/InteractiveAlerts/)
+[![NuGet](https://img.shields.io/badge/InteractiveAlerts-0.1.5-brightgreen.svg)](https://www.nuget.org/packages/InteractiveAlerts/)
 
 ## Setup
 
