@@ -6,7 +6,7 @@ Supports
 * iOS
 * Portable library
 
-[![NuGet](https://img.shields.io/nuget/v/Acr.UserDialogs.svg?maxAge=2592000)](https://www.nuget.org/packages/InteractiveAlerts/)
+[![NuGet](https://img.shields.io/badge/InteractiveAlerts-0.1.3-brightgreen.svg)](https://www.nuget.org/packages/InteractiveAlerts/)
 
 ## Setup
 
