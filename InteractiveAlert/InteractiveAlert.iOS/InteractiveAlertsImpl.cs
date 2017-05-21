@@ -36,23 +36,24 @@
             return new DisposableAction(alertView.HideView);
         }
 
-        protected InteractiveAlertView CreateAlertView(InteractiveAlertConfig alertConfig)
-        {
-            var appearance = new InteractiveAlertView.SCLAppearance();
-            appearance.ShowCloseButton = alertConfig.CancelButton != null;
-            appearance.ShouldAutoDismiss = alertConfig.IsCancellable;
+		protected InteractiveAlertView CreateAlertView(InteractiveAlertConfig alertConfig)
+		{
+			var appearance = new InteractiveAlertView.SCLAppearance();
+			appearance.ShowCloseButton = alertConfig.CancelButton != null;
+			appearance.DisableTapGesture = !alertConfig.IsCancellable;
+			appearance.HideWhenBackgroundViewIsTapped = alertConfig.IsCancellable;
 
-            var alertView = new InteractiveAlertView(appearance);
+			var alertView = new InteractiveAlertView(appearance);
 
-            alertView.SetDismissBlock(alertConfig.CancelButton?.Action);
-            if (alertConfig.OkButton != null)
-            {
-                alertView.AddButton(alertConfig.OkButton.Title, alertConfig.OkButton.Action);
-            }
+			alertView.SetDismissBlock(alertConfig.CancelButton?.Action);
+			if (alertConfig.OkButton != null)
+			{
+				alertView.AddButton(alertConfig.OkButton.Title, alertConfig.OkButton.Action);
+			}
 
-            alertView.ShowAlert(alertConfig.Style, alertConfig.Title, alertConfig.Message, alertConfig.CancelButton?.Title);
+			alertView.ShowAlert(alertConfig.Style, alertConfig.Title, alertConfig.Message, alertConfig.CancelButton?.Title);
 
-            return alertView;
-        }
+			return alertView;
+		}
     }
 }
