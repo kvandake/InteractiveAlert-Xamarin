@@ -3,6 +3,8 @@ using UIKit;
 
 namespace InteractiveAlert.iOS.Sample
 {
+    using System;
+
     // The UIApplicationDelegate for the application. This class is responsible for launching the
     // User Interface of the application, as well as listening (and optionally responding) to application events from iOS.
     [Register("AppDelegate")]
@@ -20,7 +22,16 @@ namespace InteractiveAlert.iOS.Sample
         {
 			// Override point for customization after application launch.
 			// If not required for your application you can safely delete this method
-			var f = InteractiveAlerts.Instance;
+            InteractiveAlertView.Presented += (s, e) =>
+            {
+                Console.WriteLine("Alert presented");
+            };
+            
+            InteractiveAlertView.Closed += (s, e) =>
+            {
+                Console.WriteLine("Alert closed");
+            };
+            
             return true;
         }
 

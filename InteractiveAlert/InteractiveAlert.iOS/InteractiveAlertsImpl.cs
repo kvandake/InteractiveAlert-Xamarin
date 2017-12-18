@@ -6,14 +6,14 @@
     {
         public IDisposable ShowAlert(InteractiveAlertConfig alertConfig)
         {
-            var alertView = this.CreateAlertView(alertConfig);
+            var alertView = CreateAlertView(alertConfig);
 
             return new DisposableAction(alertView.HideView);
         }
 
         public IDisposable ShowAlert(EditableInteractiveAlertConfig alertConfig)
         {
-            var alertView = this.CreateAlertView(alertConfig);
+            var alertView = CreateAlertView(alertConfig);
             if (alertConfig.SingleLine)
             {
                 var textField = alertView.AddTextField(alertConfig.Placeholder);
@@ -36,7 +36,7 @@
             return new DisposableAction(alertView.HideView);
         }
 
-		protected InteractiveAlertView CreateAlertView(InteractiveAlertConfig alertConfig)
+	    private static InteractiveAlertView CreateAlertView(InteractiveAlertConfig alertConfig)
 		{
 			var appearance = new InteractiveAlertView.SCLAppearance();
 			appearance.ShowCloseButton = alertConfig.CancelButton != null;

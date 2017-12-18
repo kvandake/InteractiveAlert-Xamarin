@@ -9,5 +9,6 @@ obj/
 */packages/
 .droidres
 *.nupkg
+.idea
 
 # End of https://www.gitignore.io/api/xamarinstudio
