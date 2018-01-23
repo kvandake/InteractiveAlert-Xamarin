@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>InteractiveAlerts</id>
-    <version>0.1.7</version>
+    <version>0.1.8</version>
     <title>Interactvie Alerts fo Xamarin</title>
     <authors>kvandake</authors>
     <owners>kvandake</owners>
@@ -17,7 +17,7 @@
     <tags>alert,xamarin</tags>
      <dependencies>
       <group targetFramework="MonoAndroid10">
-          <dependency id="Xamarin.Android.Support.v7.AppCompat" version="25.3.1" />
+          <dependency id="Xamarin.Android.Support.v7.AppCompat" version="26.1.0.1" />
       </group>
      </dependencies>
     </metadata>
