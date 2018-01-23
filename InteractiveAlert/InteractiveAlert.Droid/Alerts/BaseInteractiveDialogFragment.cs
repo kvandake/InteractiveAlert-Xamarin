@@ -90,8 +90,12 @@ namespace InteractiveAlert.Droid
 			this.SetContentText(contentView, Resource.Id.alert_dialog_content, this.Config.Message);
 			alertDialogBuilder.SetView(contentView);
 
-			return alertDialogBuilder.Create();
-		}
+		    var dialog = alertDialogBuilder.Create();
+		    dialog.SetCanceledOnTouchOutside(cancel: this.Config.IsCancellable);
+		    dialog.SetCancelable(flag: this.Config.IsCancellable);
+
+		    return dialog;
+        }
 
 		protected void SetContentText(View contentView, int textViewId, string text)
 		{
