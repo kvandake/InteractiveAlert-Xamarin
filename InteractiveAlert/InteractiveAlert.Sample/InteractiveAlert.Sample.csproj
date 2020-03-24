@@ -33,11 +33,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InteractiveAlert\InteractiveAlert.csproj">
-      <Project>{F8DCEDF2-7FEB-49CB-82DE-C064346829C6}</Project>
+      <Project>{285FEF07-6008-45A6-AA6B-01F620B6F8C6}</Project>
       <Name>InteractiveAlert</Name>
     </ProjectReference>
     <ProjectReference Include="..\InteractiveAlert.Core\InteractiveAlert.Core.csproj">
-      <Project>{F137342A-B2E7-451E-A783-5A533F440761}</Project>
+      <Project>{7583D7B0-572C-4469-B502-77A1291E0A50}</Project>
       <Name>InteractiveAlert.Core</Name>
     </ProjectReference>
   </ItemGroup>

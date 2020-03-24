@@ -50,16 +50,16 @@
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InteractiveAlerts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="InteractiveAlertView.cs" />
     <Compile Include="InteractiveAlertsImpl.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InteractiveAlert.Core\InteractiveAlert.Core.csproj">
-      <Project>{F137342A-B2E7-451E-A783-5A533F440761}</Project>
+      <Project>{7583D7B0-572C-4469-B502-77A1291E0A50}</Project>
       <Name>InteractiveAlert.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="..\InteractiveAlert.Shared\InteractiveAlert.Shared.projitems" Label="Shared" Condition="Exists('..\InteractiveAlert.Shared\InteractiveAlert.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

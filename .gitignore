@@ -12,3 +12,5 @@ obj/
 .idea
 
 # End of https://www.gitignore.io/api/xamarinstudio
+InteractiveAlert/.DS_Store
+.DS_Store

@@ -2,8 +2,6 @@
 using Android.Widget;
 using Android.OS;
 using Android.Support.V7.App;
-using InteractiveAlert.Droid;
-using InteractiveAlert;
 using InteractiveAlert.Sample;
 
 namespace InteractiveAlert.Droid.Sample
