@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InteractiveAlert.Droid", "I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InteractiveAlert.iOS", "InteractiveAlert.iOS\InteractiveAlert.iOS.csproj", "{54037453-C9C1-49E9-988F-889F37388DBD}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "InteractiveAlert.Shared", "InteractiveAlert.Shared\InteractiveAlert.Shared.shproj", "{C37474E2-1BEC-430D-AD61-30567D6B5776}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "InteractiveAlert.Shared", "InteractiveAlert.Shared\InteractiveAlert.Shared.csproj", "{C37474E2-1BEC-430D-AD61-30567D6B5776}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0A522712-366D-4D43-AE5C-0809D9580259}"
 	ProjectSection(SolutionItems) = preProject
@@ -74,6 +74,18 @@ Global
 		{F8DCEDF2-7FEB-49CB-82DE-C064346829C6}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{F8DCEDF2-7FEB-49CB-82DE-C064346829C6}.Debug|iPhone.ActiveCfg = Debug|Any CPU
 		{F8DCEDF2-7FEB-49CB-82DE-C064346829C6}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{C37474E2-1BEC-430D-AD61-30567D6B5776}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C37474E2-1BEC-430D-AD61-30567D6B5776}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C37474E2-1BEC-430D-AD61-30567D6B5776}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{C37474E2-1BEC-430D-AD61-30567D6B5776}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{C37474E2-1BEC-430D-AD61-30567D6B5776}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{C37474E2-1BEC-430D-AD61-30567D6B5776}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{C37474E2-1BEC-430D-AD61-30567D6B5776}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C37474E2-1BEC-430D-AD61-30567D6B5776}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C37474E2-1BEC-430D-AD61-30567D6B5776}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{C37474E2-1BEC-430D-AD61-30567D6B5776}.Release|iPhone.Build.0 = Release|Any CPU
+		{C37474E2-1BEC-430D-AD61-30567D6B5776}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{C37474E2-1BEC-430D-AD61-30567D6B5776}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection

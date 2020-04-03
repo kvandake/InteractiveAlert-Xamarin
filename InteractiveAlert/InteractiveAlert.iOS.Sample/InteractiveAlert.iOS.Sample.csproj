@@ -110,13 +110,13 @@
       <Project>{D515B166-36F9-40D3-A455-2526993F0A1E}</Project>
       <Name>InteractiveAlert.Sample</Name>
     </ProjectReference>
-    <ProjectReference Include="..\InteractiveAlert.Core\InteractiveAlert.Core.csproj">
-      <Project>{F137342A-B2E7-451E-A783-5A533F440761}</Project>
-      <Name>InteractiveAlert.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\InteractiveAlert.iOS\InteractiveAlert.iOS.csproj">
       <Project>{54037453-C9C1-49E9-988F-889F37388DBD}</Project>
       <Name>InteractiveAlert.iOS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InteractiveAlert.Core\InteractiveAlert.Core.csproj">
+      <Project>{7583D7B0-572C-4469-B502-77A1291E0A50}</Project>
+      <Name>InteractiveAlert.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
